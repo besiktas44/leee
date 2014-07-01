@@ -1768,7 +1768,6 @@ if __name__ == '__main__':
 	'''
 
 	a=re.findall('\(.+?\.zip\)',r,re.I)
-	print a
 	pool = Pool(processes=4)
 	pool.map(download,a)
 
