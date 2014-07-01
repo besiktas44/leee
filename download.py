@@ -8,6 +8,7 @@ def download(i):
 	j=i[1:-1]
 	testfile=urllib.URLopener()
 	testfile.retrieve(j,j.rsplit('/',1)[1])
+	print 'COMPLETED %s'%(i)
 	
 if __name__ == '__main__':
 	r='''
@@ -1767,7 +1768,8 @@ if __name__ == '__main__':
 
 	'''
 
-	a=re.findall('\(.+?\.zip\)',r,re.I)
+	a=re.findall('\([^)]+?\.zip\)',r,re.I)
+	print a
 	pool = Pool(processes=4)
 	pool.map(download,a)
 
