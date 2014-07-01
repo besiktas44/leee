@@ -3,12 +3,26 @@
 import re
 import urllib
 from multiprocessing import Pool
+import requests
+import progressbar
+CHUNK_SIZE = 1024 * 1024 # 1MB
 
 def download(i):
-	j=i[1:-1]
-	testfile=urllib.URLopener()
-	testfile.retrieve(j,j.rsplit('/',1)[1])
-	print 'COMPLETED %s'%(i)
+	# j=i[1:-1]
+	# testfile=urllib.URLopener()
+	# testfile.retrieve(j,j.rsplit('/',1)[1])
+	# print 'COMPLETED %s'%(i)
+	
+
+	nwej=j.rsplit('/',1)[1]
+	r = requests.get(j)
+	total_size = int(r.headers['content-length'])
+	pbar = progressbar.ProgressBar(maxval=total_size).start()
+	with open(newj,'wb') as file_contents:
+		for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
+			file_contents.write(chunk)
+			pbar.update(len(file_contents.tell()))
+
 	
 if __name__ == '__main__':
 	r='''
@@ -20,7 +34,7 @@ if __name__ == '__main__':
 	* [Arduino](#arduino)
 	* [ASP.NET MVC](#aspnet-mvc)
 	* [Assembly Language](#assembly-language)
-	    * [Non-X86](#non-x86)
+		* [Non-X86](#non-x86)
 	* [AutoHotkey](#autohotkey)
 	* [Autotools](#autotools)
 	* [Awk](#awk)
@@ -54,56 +68,56 @@ if __name__ == '__main__':
 	* [Git](#git)
 	* [Go](#go)
 	* [Groovy](#groovy)
-	    * [Gradle](#gradle)
-	    * [Grails](#grails)
-	    * [Spock Framework](#spock-framework)
+		* [Gradle](#gradle)
+		* [Grails](#grails)
+		* [Spock Framework](#spock-framework)
 	* [Graphical user interfaces](#graphical-user-interfaces)
 	* [Graphics Programming](#graphics-programming)
 	* [Hadoop](#hadoop)
 	* [Haskell](#haskell)
 	* [HTML / CSS](#html--css)
-	    * [Bootstrap](#bootstrap)
+		* [Bootstrap](#bootstrap)
 	* [Icon](#icon)
 	* [IDL](#idl)
 	* [iOS](#ios)
 	* [Isabelle/HOL](#isabelle--hol)
 	* [J](#j)
 	* [Java](#java)
-	    * [Spring](#spring)
-	    * [Spring Boot](#spring-boot)
-	    * [Spring Security](#spring-security)
-	    * [Wicket](#wicket)
+		* [Spring](#spring)
+		* [Spring Boot](#spring-boot)
+		* [Spring Security](#spring-security)
+		* [Wicket](#wicket)
 	* [JavaScript](#javascript)
-	    * [Javascript frameworks](#javascript-frameworks)
-	    * [Node.js](#nodejs)
+		* [Javascript frameworks](#javascript-frameworks)
+		* [Node.js](#nodejs)
 	* [Jenkins](#jenkins)
 	* [Language Agnostic](#language-agnostic)
-	    * [Algorithms & Datastructures](#algorithms--data-structures)
-	    * [Cellular Automata](#cellular-automata)
-	    * [Cloud Computing](#cloud-computing)
-	    * [Compiler Design](#compiler-design)
-	    * [Database](#database)
-	    * [Datamining](#datamining)
-	    * [Information Retrieval](#information-retrieval)
-	    * [Licensing](#licensing)
-	    * [Machine Learning](#machine-learning)
-	    * [Mathematics](#mathematics)
-	    * [Misc](#misc)
-	    * [MOOC](#mooc)
-	    * [Networking](#networking)
-	    * [Open Source Ecosystem](#open-source-ecosystem)
-	    * [Operating systems](#operating-systems)
-	    * [Parallel Programming](#parallel-programming)
-	    * [Partial Evaluation](#partial-evaluation)
-	    * [Professional Development](#professional-development)
-	    * [Programming Paradigms](#programming-paradigms)
-	    * [Regular Expressions](#regular-expressions)
-	    * [Reverse Engineering](#reverse-engineering)
-	    * [Security](#security)
-	    * [Software Architecture](#software-architecture)
-	    * [Standards](#standards)
-	    * [Theoretical Computer Science](#theoretical-computer-science)
-	    * [Web Performance](#web-performance)
+		* [Algorithms & Datastructures](#algorithms--data-structures)
+		* [Cellular Automata](#cellular-automata)
+		* [Cloud Computing](#cloud-computing)
+		* [Compiler Design](#compiler-design)
+		* [Database](#database)
+		* [Datamining](#datamining)
+		* [Information Retrieval](#information-retrieval)
+		* [Licensing](#licensing)
+		* [Machine Learning](#machine-learning)
+		* [Mathematics](#mathematics)
+		* [Misc](#misc)
+		* [MOOC](#mooc)
+		* [Networking](#networking)
+		* [Open Source Ecosystem](#open-source-ecosystem)
+		* [Operating systems](#operating-systems)
+		* [Parallel Programming](#parallel-programming)
+		* [Partial Evaluation](#partial-evaluation)
+		* [Professional Development](#professional-development)
+		* [Programming Paradigms](#programming-paradigms)
+		* [Regular Expressions](#regular-expressions)
+		* [Reverse Engineering](#reverse-engineering)
+		* [Security](#security)
+		* [Software Architecture](#software-architecture)
+		* [Standards](#standards)
+		* [Theoretical Computer Science](#theoretical-computer-science)
+		* [Web Performance](#web-performance)
 	* [LaTeX](#latex)
 	* [Linux](#linux)
 	* [Lisp](#lisp)
@@ -135,24 +149,24 @@ if __name__ == '__main__':
 	* [PowerShell](#powershell)
 	* [Processing](#processing)
 	* [Prolog](#prolog)
-	    * [Constraint Logic Programming](#constraint-logic-programming-extended-prolog)
+		* [Constraint Logic Programming](#constraint-logic-programming-extended-prolog)
 	* [Python](#python)
-	    * [Django](#django)
-	    * [Flask](#flask)
-	    * [Pandas](#pandas)
+		* [Django](#django)
+		* [Flask](#flask)
+		* [Pandas](#pandas)
 	* [QML](#qml)
 	* [R](#r)
 	* [Racket](#racket)
 	* [REBOL](#rebol)
 	* [Ruby](#ruby)
-	    * [RSpec](#rspec)
-	    * [Sinatra](#sinatra)
-	    * [Ruby on Rails](#ruby-on-rails)
+		* [RSpec](#rspec)
+		* [Sinatra](#sinatra)
+		* [Ruby on Rails](#ruby-on-rails)
 	* [Rust](#rust)
 	* [Sage](#sage)
 	* [Scala](#scala)
-	    * [Lift](#lift)
-	    * [Play Scala](#play-scala)
+		* [Lift](#lift)
+		* [Play Scala](#play-scala)
 	* [Scheme](#scheme)
 	* [Scilab](#scilab)
 	* [Scratch](#scratch)
@@ -1320,16 +1334,16 @@ if __name__ == '__main__':
 
 	###PHP
 	* CakePHP Framework
-	    * [CakePHP Cookbook 2.x](http://book.cakephp.org/2.0/_downloads/en/CakePHPCookbook.pdf)
+		* [CakePHP Cookbook 2.x](http://book.cakephp.org/2.0/_downloads/en/CakePHPCookbook.pdf)
 	* Drupal Framework
-	    * Drupal 7
-	        * [The Tiny Book of Rules](https://drupal.org/files/tiny-book-of-rules.pdf) (PDF)
-	        * [Master Drupal in 7 hours](http://dl.dropboxusercontent.com/u/54624702/Master%20Drupal%20in%207%20hours_v1.1.pdf) (PDF)
-	    * Drupal 8
+		* Drupal 7
+			* [The Tiny Book of Rules](https://drupal.org/files/tiny-book-of-rules.pdf) (PDF)
+			* [Master Drupal in 7 hours](http://dl.dropboxusercontent.com/u/54624702/Master%20Drupal%20in%207%20hours_v1.1.pdf) (PDF)
+		* Drupal 8
 	* Laravel Framework
-	    * [Laravel 4 Official Documentation. Synced Daily](https://leanpub.com/l4)
-	    * [Official Documentation (Offline Version)](https://leanpub.com/l4-offline-doc)
-	    * [Laravel: Code Bright](http://daylerees.com/codebright)
+		* [Laravel 4 Official Documentation. Synced Daily](https://leanpub.com/l4)
+		* [Official Documentation (Offline Version)](https://leanpub.com/l4-offline-doc)
+		* [Laravel: Code Bright](http://daylerees.com/codebright)
 	* [PHP 5 Power Programming](http://www.informit.com/content/images/013147149X/downloads/013147149X_book.pdf)
 	* [PHP Best Practices](https://phpbestpractices.org/)
 	* [PHP Essentials](http://www.techotopia.com/index.php/PHP_Essentials)
@@ -1404,7 +1418,7 @@ if __name__ == '__main__':
 	* [Hacking Secret Cyphers with Python](http://inventwithpython.com/hacking/chapters/) - Al Sweigart (3.3)
 	* [Hitchiker's Guide to Python!](http://docs.python-guide.org/en/latest/) (2.6)
 	* [How to Think Like a Computer Scientist: Learning with Python](http://www.greenteapress.com/thinkpython/thinkCSpy/) - Allen B. Downey, Jeff Elkner and Chris Meyers (2.4)
-	    * [How to Think Like a Computer Scientist: Learning with Python, Interactive Edition](http://interactivepython.org/courselib/static/thinkcspy/index.html) (3.2)
+		* [How to Think Like a Computer Scientist: Learning with Python, Interactive Edition](http://interactivepython.org/courselib/static/thinkcspy/index.html) (3.2)
 	* [Introduction to Programming Using Python](http://python-ebook.blogspot.com) - Cody Jackson (1st edition) (2.3)
 	* [Introduction to Programming with Python](http://opentechschool.github.io/python-beginners/en/) (3.3)
 	* [Introduction to python](http://kracekumar.com/post/71171551647/introduction-to-python) - Kracekumar (2.7.3)
@@ -1776,40 +1790,42 @@ if __name__ == '__main__':
 
 
 
---- Answer 1 ---
-import urllib, os
-link = "http://python.org"
-print "opening url:", link
-site = urllib.urlopen(link)
-meta = site.info()
-print "Content-Length:", meta.getheaders("Content-Length")[0]
-f = open("out.txt", "r")
-print "File on disk:",len(f.read())
-f.close()
-f = open("out.txt", "w")
-f.write(site.read())
-site.close()
-f.close()
-f = open("out.txt", "r")
-print "File on disk after download:",len(f.read())
-f.close()
-print "os.stat().st_size returns:", os.stat("out.txt").st_size
+# --- Answer 1 ---
+# import urllib, os
+# link = "http://python.org"
+# print "opening url:", link
+# site = urllib.urlopen(link)
+# meta = site.info()
+# print "Content-Length:", meta.getheaders("Content-Length")[0]
+# f = open("out.txt", "r")
+# print "File on disk:",len(f.read())
+# f.close()
+# f = open("out.txt", "w")
+# f.write(site.read())
+# site.close()
+# f.close()
+# f = open("out.txt", "r")
+# print "File on disk after download:",len(f.read())
+# f.close()
+# print "os.stat().st_size returns:", os.stat("out.txt").st_size
 
---- Answer 2 ---
-import requests
-import progressbar
+# --- Answer 2 ---
+# import requests
+# import progressbar
 
-CHUNK_SIZE = 1024 * 1024 # 1MB
+# ISO = "http://www.ubuntu.com/start-download?distro=desktop&bits=32&release=lts"
+# CHUNK_SIZE = 1024 * 1024 # 1MB
 
-r = requests.get(j)
-total_size = int(r.headers['content-length'])
-pbar = progressbar.ProgressBar(maxval=total_size).start()
-with open(newj,'wb') as file_contents:
-	for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
-	    file_contents.write(chunk)
-	    pbar.update(len(file_contents.tell()))
+# r = requests.get(ISO)
+# total_size = int(r.headers['content-length'])
+# pbar = progressbar.ProgressBar(maxval=total_size).start()
 
---- Answer 3 ---
-import urllib2
-imgdata = urllib2.urlopen(href)
-image_type,width,height = getimageinfo.getImageInfo(imgdata)
+# file_contents = ""
+# for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
+#	 file_contents += chunk
+#	 pbar.update(len(file_contents))
+
+# --- Answer 3 ---
+# import urllib2
+# imgdata = urllib2.urlopen(href)
+# image_type,width,height = getimageinfo.getImageInfo(imgdata)
