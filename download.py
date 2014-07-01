@@ -8,7 +8,9 @@ import progressbar
 CHUNK_SIZE = 1024 * 1024 # 1MB
 
 def download(i):
-	# j=i[1:-1]
+	j=i[1:-1]
+
+	
 	# testfile=urllib.URLopener()
 	# testfile.retrieve(j,j.rsplit('/',1)[1])
 	# print 'COMPLETED %s'%(i)
