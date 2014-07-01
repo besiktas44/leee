@@ -10,7 +10,7 @@ CHUNK_SIZE = 1024 * 1024 # 1MB
 def download(i):
 	j=i[1:-1]
 
-	
+
 	# testfile=urllib.URLopener()
 	# testfile.retrieve(j,j.rsplit('/',1)[1])
 	# print 'COMPLETED %s'%(i)
@@ -19,6 +19,7 @@ def download(i):
 	nwej=j.rsplit('/',1)[1]
 	r = requests.get(j)
 	total_size = int(r.headers['content-length'])
+	print total_size
 	pbar = progressbar.ProgressBar(maxval=total_size).start()
 	with open(newj,'wb') as file_contents:
 		for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
