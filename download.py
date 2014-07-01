@@ -1774,3 +1774,42 @@ if __name__ == '__main__':
 	pool.map(download,a)
 
 
+
+
+--- Answer 1 ---
+import urllib, os
+link = "http://python.org"
+print "opening url:", link
+site = urllib.urlopen(link)
+meta = site.info()
+print "Content-Length:", meta.getheaders("Content-Length")[0]
+f = open("out.txt", "r")
+print "File on disk:",len(f.read())
+f.close()
+f = open("out.txt", "w")
+f.write(site.read())
+site.close()
+f.close()
+f = open("out.txt", "r")
+print "File on disk after download:",len(f.read())
+f.close()
+print "os.stat().st_size returns:", os.stat("out.txt").st_size
+
+--- Answer 2 ---
+import requests
+import progressbar
+
+CHUNK_SIZE = 1024 * 1024 # 1MB
+
+r = requests.get(j)
+total_size = int(r.headers['content-length'])
+pbar = progressbar.ProgressBar(maxval=total_size).start()
+with open(newj,'wb') as file_contents:
+	for chunk in r.iter_content(chunk_size=CHUNK_SIZE):
+	    file_contents.write(chunk)
+	    pbar.update(len(file_contents.tell()))
+
+--- Answer 3 ---
+import urllib2
+imgdata = urllib2.urlopen(href)
+image_type,width,height = getimageinfo.getImageInfo(imgdata)
